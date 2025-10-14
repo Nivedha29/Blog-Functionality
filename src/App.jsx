@@ -1,35 +1,63 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
+import { Routes, Route, Navigate, Link } from "react-router-dom";
+import PrivateRoute from "./routes/PrivateRoute";
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import ProfilePage from "./pages/ProfilePage";
+import ArticlePage from "./pages/ArticlePage";
+import NewArticlePage from "./pages/NewArticlePage";
+import EditArticlePage from "./pages/EditArticlePage";
+import { useAuth } from "./state/AuthContext";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const { user, logout } = useAuth();
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="app-shell">
+      <header className="topbar">
+        <Link to="/" className="brand">RealWorld Blog</Link>
+        <nav className="nav">
+          <Link to="/">Home</Link>
+          {user ? (
+            <>
+              <Link to="/new-article" className="btn">New Article</Link>
+              <Link to="/profile">Profile</Link>
+              <button className="btn linklike" onClick={logout}>Logout</button>
+            </>
+          ) : (
+            <>
+              <Link to="/sign-in">Sign in</Link>
+              <Link to="/sign-up">Sign up</Link>
+            </>
+          )}
+        </nav>
+      </header>
 
-export default App
+      <main className="main">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/sign-in" element={<LoginPage />} />
+          <Route path="/sign-up" element={<RegisterPage />} />
+          <Route path="/profile" element={
+            <PrivateRoute>
+              <ProfilePage />
+            </PrivateRoute>
+          } />
+          <Route path="/articles/:slug" element={<ArticlePage />} />
+          <Route path="/new-article" element={
+            <PrivateRoute>
+              <NewArticlePage />
+            </PrivateRoute>
+          } />
+          <Route path="/articles/:slug/edit" element={
+            <PrivateRoute>
+              <EditArticlePage />
+            </PrivateRoute>
+          } />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </main>
+    </div>
+  );
+}
