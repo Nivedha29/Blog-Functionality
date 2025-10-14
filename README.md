@@ -52,3 +52,8 @@ Inline error display
 
 # ScreenShots
 ![Article creation](https://github.com/user-attachments/assets/d1374eb8-fe9e-4bce-8f21-d651f260fa1f)
+
+# Demo
+
+https://github.com/user-attachments/assets/5b76ef19-9b1d-4286-81ff-b20a54aa16f2
+
