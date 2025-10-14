@@ -1,16 +1,54 @@
-# React + Vite
+# 📰 Blog Authentication App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-featured **React + Vite** blogging platform with **user authentication**, **article creation**, **editing**, and **deletion** — built using the [RealWorld API](https://realworld.habsida.net/api/articles).  
+This project demonstrates protected routes, form validation, and API integration in a clean modern UI.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## React Compiler
+- 🔐 **User Authentication**
+  - Sign Up, Sign In, and Persistent Login (Token stored in localStorage)
+  - Protected Routes using React Router
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 📰 **Article Management**
+  - Create, Edit, and Delete articles
+  - Form validation (Title, Description, Body required)
+  - Markdown-supported article body
+  - Confirmation modal before deletion
 
-## Expanding the ESLint configuration
+# Authentication
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Implemented via AuthContext.jsx
+
+Stores user and token in localStorage
+
+PrivateRoute.jsx protects routes (redirects unauthenticated users)
+
+# CRUD Operations
+
+NewArticlePage → Create Article
+
+EditArticlePage → Edit Existing Article
+
+ArticlePage → Delete Article with Confirmation Modal
+
+All handled via REST endpoints (POST, PUT, DELETE)
+
+# Validation
+
+Done inside ArticleForm.jsx
+
+Required fields: Title, Description, Body
+
+Inline error display
+
+| Package          | Version | Purpose                    |
+| ---------------- | ------- | -------------------------- |
+| React            | ^19.2.0 | Core UI framework          |
+| React Router DOM | ^7.9.4  | Routing & Protected Routes |
+| Vite             | ^7.1.9  | Fast build tool            |
+| ESLint           | ^9.37.0 | Linting & code consistency |
+
+# ScreenShots
+![Article creation](https://github.com/user-attachments/assets/d1374eb8-fe9e-4bce-8f21-d651f260fa1f)
